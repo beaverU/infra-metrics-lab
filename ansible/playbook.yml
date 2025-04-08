@@ -1,0 +1,22 @@
+---
+- name: Setting up environment and running monitoring stack
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Upgrading all packages in the system
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
+        update_cache: yes
+    - name: Installing Docker and Docker Compose
+      ansible.builtin.apt:
+        name:
+          - docker
+          - docker-compose
+        state: present
+        update_cache: yes
+    - name: Running Docker Compose to start the monitoring stack
+      ansible.builtin.command:
+        cmd: docker-compose up -d
+        chdir: /vagrant_data/
+      register: docker_compose_output
