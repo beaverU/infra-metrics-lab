@@ -1,6 +1,6 @@
 ---
 - name: Setting up environment and running monitoring stack
-  hosts: localhost
+  hosts: metrics-lab
   become: true
   tasks:
     - name: Upgrading all packages in the system
@@ -12,11 +12,11 @@
       ansible.builtin.apt:
         name:
           - docker
-          - docker-compose
+          - docker-compose-v2
         state: present
         update_cache: yes
     - name: Running Docker Compose to start the monitoring stack
       ansible.builtin.command:
-        cmd: docker-compose up -d
-        chdir: /vagrant_data/
+        cmd: docker compose up -d
+        chdir: /vagrant/
       register: docker_compose_output
