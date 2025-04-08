@@ -1,2 +1,34 @@
 # infra-metrics-lab
-Infrastructure lab: Vagrant VM configured with Ansible, running Prometheus and Grafana with Node Exporter.
+
+Учебная лаборатория для DevOps-инженеров: создание виртуальной машины, настройка с помощью Ansible и развёртывание стека мониторинга с помощью Docker Compose.
+
+## Этапы создания проекта
+
+### Этап 1: Подготовка среды разработки
+
+- Установка Vagrant, VirtualBox и Ansible
+- Создание Vagrantfile для развертывания Ubuntu VM
+  - `vagrant init` для создания скелета файла
+  - Читаем комментарии, конфигурируем необходимую для лабораторной работы ВМ. При необходимости смотрим документацию.
+
+### Этап 2: Настройка VM с помощью Ansible
+
+- Установка Docker и Docker Compose
+- Настройка контейнеров Prometheus и Grafana
+
+### Этап 3: Развёртывание стека мониторинга
+
+- Запуск Prometheus и Grafana через Docker Compose
+- Настройка Prometheus для сбора метрик от Node Exporter
+
+### Этап 4: Визуализация метрик
+
+- Установка Node Exporter на виртуальную машину
+- Добавление панели "Node Exporter Full" в Grafana
+
+### Этап 5: Доступ и мониторинг
+
+- Открытие Grafana по адресу `http://localhost:3000`
+- Просмотр метрик: CPU, память, диск и другие
+
+---
