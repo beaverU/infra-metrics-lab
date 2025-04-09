@@ -2,6 +2,10 @@
 - name: Setting up environment and running monitoring stack
   hosts: metrics-lab
   become: true
+
+  roles:
+    - role: prometheus.prometheus.node_exporter
+
   tasks:
     - name: Upgrading all packages in the system
       ansible.builtin.apt:
@@ -18,5 +22,5 @@
     - name: Running Docker Compose to start the monitoring stack
       ansible.builtin.command:
         cmd: docker compose up -d
-        chdir: /vagrant/
+        chdir: /vagrant/docker/
       register: docker_compose_output
