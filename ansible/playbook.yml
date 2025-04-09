@@ -4,22 +4,36 @@
   become: true
 
   roles:
-    - role: prometheus.prometheus.node_exporter
+    - role: ableton.prometheus_node_exporter
 
   tasks:
-    - name: Upgrading all packages in the system
+    - name: Upgrade all system packages
       ansible.builtin.apt:
         name: "*"
         state: latest
         update_cache: yes
+
+    - name: Synchronize system date and time
+      block:
+        - name: Ensure systemd-timesyncd is installed
+          ansible.builtin.apt:
+            name: systemd-timesyncd
+            state: present
+        - name: Ensure systemd-timesyncd is enabled and running
+          ansible.builtin.systemd:
+            name: systemd-timesyncd
+            enabled: true
+            state: started
+
     - name: Installing Docker and Docker Compose
       ansible.builtin.apt:
         name:
-          - docker
+          - docker.io
           - docker-compose-v2
         state: present
         update_cache: yes
-    - name: Running Docker Compose to start the monitoring stack
+
+    - name: Launch monitoring stack using Docker Compose
       ansible.builtin.command:
         cmd: docker compose up -d
         chdir: /vagrant/docker/
