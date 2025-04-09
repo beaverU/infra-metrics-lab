@@ -18,7 +18,6 @@ Vagrant.configure("2") do |config|
 
     # Provider-specific configuration so you can fine-tune various
     # backing providers for Vagrant. These expose provider-specific options.
-    # Example for VirtualBox:
     node.vm.provider "virtualbox" do |vb|
       # Customize the amount of memory on the VM:
       vb.memory = "2048"
@@ -30,7 +29,6 @@ Vagrant.configure("2") do |config|
     # Running ansible_local provisioner in order to avoid external dependencies
     node.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "/vagrant/ansible/playbook.yml"
-      #ansible.inventory_path = "/vagrant/ansible/inventory"
       ansible.galaxy_role_file = "/vagrant/ansible/requirements.yml"
       #ansible.verbose = true
       #ansible.limit = "all"
