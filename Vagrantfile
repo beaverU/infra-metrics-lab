@@ -32,6 +32,7 @@ Vagrant.configure("2") do |config|
     node.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "/vagrant/ansible/playbook.yml"
       #ansible.inventory_path = "/vagrant/ansible/inventory"
+      ansible.galaxy_role_file = "/vagrant/ansible/requirements.yml"
       #ansible.verbose = true
       #ansible.limit = "all"
     end
